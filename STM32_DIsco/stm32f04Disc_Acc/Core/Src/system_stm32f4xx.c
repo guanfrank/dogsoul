@@ -48,14 +48,14 @@
 #include "stm32f4xx.h"
 
 #if !defined  (HSE_VALUE) 
-  //#define HSE_VALUE    ((uint32_t)25000000) /*!< Default value of the External oscillator in Hz */
-  #define HSE_VALUE    ((uint32_t)8000000) /*!< Default value of the External oscillator in Hz */
+  #define HSE_VALUE    ((uint32_t)25000000) /*!< Default value of the External oscillator in Hz */
 #endif /* HSE_VALUE */
 
 #if !defined  (HSI_VALUE)
   #define HSI_VALUE    ((uint32_t)16000000) /*!< Value of the Internal oscillator in Hz*/
 #endif /* HSI_VALUE */
-
+ //#define HSE_VALUE    ((uint32_t)25000000) /*!< Default value of the External oscillator in Hz */
+  #define HSE_VALUE    ((uint32_t)8000000) /*!< Default value of the External oscillator in Hz */
 /**
   * @}
   */
@@ -89,6 +89,7 @@
 
 /* Note: Following vector table addresses must be defined in line with linker
          configuration. */
+
 /*!< Uncomment the following line if you need to relocate the vector table
      anywhere in Flash or Sram, else the vector table is kept at the automatic
      remap of boot address selected */
@@ -97,8 +98,6 @@
 #if defined(USER_VECT_TAB_ADDRESS)
 /*!< Uncomment the following line if you need to relocate your vector Table
      in Sram else user remap will be done in Flash. */
-/*!< Uncomment the following line if you need to relocate your vector Table in
-     Internal SRAM. */
 /* #define VECT_TAB_SRAM */
 #if defined(VECT_TAB_SRAM)
 #define VECT_TAB_BASE_ADDRESS   SRAM_BASE       /*!< Vector Table base address field.
@@ -112,11 +111,10 @@
                                                      This value must be a multiple of 0x200. */
 #endif /* VECT_TAB_SRAM */
 #endif /* USER_VECT_TAB_ADDRESS */
+/******************************************************************************/
 #define VECT_TAB_OFFSET  0x00 /*!< Vector Table base offset field.
                                    This value must be a multiple of 0x200. */
 /******************************************************************************/
-/******************************************************************************/
-
 /**
   * @}
   */
@@ -182,7 +180,6 @@ void SystemInit(void)
 
     /* Reset CFGR register */
     RCC->CFGR = 0x00000000;
-
     /* Reset HSEON, CSSON and PLLON bits */
     RCC->CR &= (uint32_t)0xFEF6FFFF;
 #if defined (DATA_IN_ExtSRAM) || defined (DATA_IN_ExtSDRAM)
@@ -206,6 +203,7 @@ void SystemInit(void)
  #else
    SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
  #endif
+
 }
 
 /**

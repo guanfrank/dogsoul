@@ -19,6 +19,10 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include "main.h"
+/* USER CODE END Includes */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F4xx_HAL_CONF_H
@@ -29,6 +33,11 @@
 #endif
 
 /* Exported types ------------------------------------------------------------*/
+
+ void SysTick_Handler(void);
+ void EXTI0_IRQHandler(void);
+ /* USER CODE BEGIN EFP */
+ void TIMx_IRQHandler(void);
 /* Exported constants --------------------------------------------------------*/
 
 /* ########################## Module Selection ############################## */
@@ -64,6 +73,7 @@
 /* #define HAL_MMC_MODULE_ENABLED */
 #define HAL_SPI_MODULE_ENABLED
 #define HAL_TIM_MODULE_ENABLED
+
 #define HAL_UART_MODULE_ENABLED
 /* #define HAL_USART_MODULE_ENABLED */
 /* #define HAL_IRDA_MODULE_ENABLED */
@@ -185,14 +195,15 @@
 /**
   * @brief This is the HAL system configuration section
   */
-//#define  VDD_VALUE		      3300U /*!< Value of VDD in mv */
-//#define  TICK_INT_PRIORITY            0U   /*!< tick interrupt priority */
-#define  VDD_VALUE                    (3300U) /*!< Value of VDD in mv */
-#define  TICK_INT_PRIORITY            (0x0FU) /*!< tick interrupt priority */
+ //#define  VDD_VALUE		      3300U /*!< Value of VDD in mv */
+ //#define  TICK_INT_PRIORITY            0U   /*!< tick interrupt priority */
+ #define  VDD_VALUE                    (3300U) /*!< Value of VDD in mv */
+ #define  TICK_INT_PRIORITY            (0x0FU) /*!< tick interrupt priority */
+#define  TICK_INT_PRIORITY            0U   /*!< tick interrupt priority */
 #define  USE_RTOS                     0U
-//#define  PREFETCH_ENABLE              1U
-#define  PREFETCH_ENABLE              0U /* The prefetch will be enabled in SystemClock_Config(), depending on the used
-                                            STM32F405/415/07/417 device: RevA (prefetch must be off) or RevZ (prefetch can be on/off) */
+ //#define  PREFETCH_ENABLE              1U
+ #define  PREFETCH_ENABLE              0U /* The prefetch will be enabled in SystemClock_Config(), depending on the used
+                                             STM32F405/415/07/417 device: RevA (prefetch must be off) or RevZ (prefetch can be on/off) */
 #define  INSTRUCTION_CACHE_ENABLE     1U
 #define  DATA_CACHE_ENABLE            1U
 
