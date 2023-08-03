@@ -73,8 +73,8 @@ SPI_HandleTypeDef hspi1;
 
 TIM_HandleTypeDef htim1;
 
-UART_HandleTypeDef huart1;
-UART_HandleTypeDef huart3;
+//UART_HandleTypeDef huart1;
+//UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 TIM_HandleTypeDef TimHandle;
@@ -100,6 +100,8 @@ void readACC(void);
 static void SystemClock_Config(void);
 //static void error_handler(void);
 //static void error_handler(void);
+
+extern void uartTx(int32_t indx);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -110,6 +112,7 @@ int balance(int ind) {
 	if(ind < 0 || ind >3) return -1;
 	if(ind == 0) {//move front
 		printf("F\n");
+		uartTx(1);
 //		ret = HAL_UART_Transmit(&huart3, "F", 1, HAL_MAX_DELAY);
 //		if(ret != HAL_OK) 	printf("Error Tx:%d\r\n", ret);
 	}else if(ind == 1) {//move back
@@ -119,6 +122,7 @@ int balance(int ind) {
 //		   printf("Error Tx:%d\r\n", ret);}
 	}else if(ind == 2) {//stop
 		printf("A\n");
+		uartTx(0);
 //		ret = HAL_UART_Transmit(&huart3, "A", 1, HAL_MAX_DELAY);
 //		if(ret != HAL_OK) {
 //		   printf("Error Tx:%d\r\n", ret);}
@@ -162,9 +166,9 @@ void accConfigInit(void){
 void readACC(void)
 {
 	/* USER CODE BEGIN 1 */
-	const uint8_t UART_BUF_MAX = 80;
-	uint8_t buf[UART_BUF_MAX];
-	HAL_StatusTypeDef ret;
+	//const uint8_t UART_BUF_MAX = 80;
+	//uint8_t buf[UART_BUF_MAX];
+	//HAL_StatusTypeDef ret;
 	//LIS3DSH_InitTypeDef accConfigDef;
 	LIS3DSH_DataScaled acc;
 	/* USER CODE END 1 */
@@ -184,10 +188,10 @@ void readACC(void)
 		//sprintf((char*)buf,"#AccXYZ:%.12f,%.12f,%.12f\r\n", acc.x, acc.y, acc.z);
 		printf("#XYZ:%.12f,%.12f,%.12f\r\n", acc.x, acc.y, acc.z);
 		//printf("#AccXYZ:%5.2f,%5.2f,%5.2f\r\n", acc.x, acc.y, acc.z);
-		ret = HAL_UART_Transmit(&huart3, buf, strlen((char*)buf), HAL_MAX_DELAY);
-		if(ret != HAL_OK) {
-			strcpy((char*)buf, "Error Tx:%d\r\n");
-		}
+		//ret = HAL_UART_Transmit(&huart3, buf, strlen((char*)buf), HAL_MAX_DELAY);
+		//if(ret != HAL_OK) {
+		//	strcpy((char*)buf, "Error Tx:%d\r\n");
+		//}
 
 	}
 }
@@ -598,8 +602,8 @@ void assert_failed(uint8_t* file, uint32_t line)
 #endif
 /* USER CODE BEGIN 4 */
 
-extern void uartSendInit(void);
-extern void uartTx(int32_t indx);
+
+
 /* USER CODE END 4 */
 static void wake_word_callback(void) {
 	printf("[wake word]\n");
