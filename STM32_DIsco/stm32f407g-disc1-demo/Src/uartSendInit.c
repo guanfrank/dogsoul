@@ -39,6 +39,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern uint8_t WALK, STAND;
 /* UART handler declaration */
 extern UART_HandleTypeDef UartHandle;
 __IO ITStatus UartReady = RESET; //multiple definition
@@ -81,9 +82,11 @@ void uartTx(int32_t indx){
 	switch ( indx ){
 		case 0 :
 			strcpy(aTxBuffer,  "w");
+			WALK = 0; // avoid repeat sending char
 			break; /* optional */
 		case 1 :
 			strcpy(aTxBuffer,"s");
+			STAND = 0; // avoid repeat sending char
 			break; /* optional */
 		/* you can have any number of case statements */
 		default : /* Optional */
@@ -132,14 +135,14 @@ void uartTx(int32_t indx){
 
   /* Reset transmission flag */
   UartReady = RESET;
-
+#ifdef _UART_Receive_IT
   /*##-4- Put UART peripheral in reception process ###########################*/
   //if(HAL_UART_Receive_IT(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
-  if(HAL_UART_Receive_IT(&UartHandle, (uint8_t *)aRxBuffer, 1) != HAL_OK)
+  if(HAL_UART_Receive_IT(&UartHandle, (uint8_t *)aRxBuffer, 2) != HAL_OK)
   {
     Error_Handler();
   }
-
+#endif
 #else
 
   /* The board receives the message and sends it back */
@@ -167,7 +170,7 @@ void uartTx(int32_t indx){
   }
 
 #endif /* TRANSMITTER_BOARD */
-
+#ifdef _UART_Receive_IT
   /*##-5- Wait for the end of the transfer ###################################*/
   while (UartReady != SET)
   {
@@ -175,6 +178,7 @@ void uartTx(int32_t indx){
 
   /* Reset transmission flag */
   UartReady = RESET;
+#endif
   printf("aTxBuffer,aRxBuffer,RXBUFFERSIZE=%s,%s,%d", aTxBuffer,aRxBuffer,RXBUFFERSIZE);
   /*##-6- Compare the sent and received buffers ##############################*/
 /*  if(Buffercmp((uint8_t*)aTxBuffer,(uint8_t*)aRxBuffer,RXBUFFERSIZE))

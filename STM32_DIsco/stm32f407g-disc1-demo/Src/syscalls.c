@@ -45,6 +45,10 @@ extern int __io_getchar(void) __attribute__((weak));
 #define FreeRTOS
 #define MAX_STACK_SIZE 0x200
 
+#ifndef FreeRTOS
+  register char * stack_ptr asm("sp");
+#endif
+
 char *__env[1] = { 0 };
 char **environ = __env;
 

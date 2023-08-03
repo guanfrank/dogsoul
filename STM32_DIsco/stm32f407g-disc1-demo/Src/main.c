@@ -87,9 +87,13 @@ uint8_t WALK=0, STAND=0;
 void accConfigInit(void);
 static void MX_GPIO_Init(void);
 static void MX_SPI1_Init(void);
+#ifdef USE_USART
 static void MX_USART1_UART_Init(void);
 static void MX_USART3_UART_Init(void);
+#endif
 static void MX_TIM1_Init(void);
+
+
 static void my_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 void readACC(void);
@@ -100,6 +104,32 @@ static void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int balance(int ind) {
+	//sprintf((char*)buf, "#AccXYZ:%5.2f,%5.2f,%5.2f\r\n", acc.x, acc.y, acc.z);
+	//HAL_StatusTypeDef ret;
+	if(ind < 0 || ind >3) return -1;
+	if(ind == 0) {//move front
+		printf("F\n");
+//		ret = HAL_UART_Transmit(&huart3, "F", 1, HAL_MAX_DELAY);
+//		if(ret != HAL_OK) 	printf("Error Tx:%d\r\n", ret);
+	}else if(ind == 1) {//move back
+		printf("B\n");
+//		ret = HAL_UART_Transmit(&huart3, "B", 1, HAL_MAX_DELAY);
+//		if(ret != HAL_OK) {
+//		   printf("Error Tx:%d\r\n", ret);}
+	}else if(ind == 2) {//stop
+		printf("A\n");
+//		ret = HAL_UART_Transmit(&huart3, "A", 1, HAL_MAX_DELAY);
+//		if(ret != HAL_OK) {
+//		   printf("Error Tx:%d\r\n", ret);}
+	}
+#ifdef SHOW_LEDs
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, LEDS[ind][0]);//red
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, LEDS[ind][1]);//green
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_15, LEDS[ind][2]);//blue
+#endif
+	return 0;
+}
 /**
  * @brief  This function is executed in case of error occurrence.
  * @retval None
@@ -144,8 +174,14 @@ void readACC(void)
 	{
 		acc = LIS3DSH_GetDataScaled();
 		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
-
-		sprintf((char*)buf,"#AccXYZ:%.12f,%.12f,%.12f\r\n", acc.x, acc.y, acc.z);
+	   	if(      acc.x > 0.1f) {//move up/back - red
+			balance(0);
+		}else if(acc.x < -0.1f) {//move down/front - green
+			balance(1);
+		}else {//no move - blue
+			balance(2);
+		}
+		//sprintf((char*)buf,"#AccXYZ:%.12f,%.12f,%.12f\r\n", acc.x, acc.y, acc.z);
 		printf("#XYZ:%.12f,%.12f,%.12f\r\n", acc.x, acc.y, acc.z);
 		//printf("#AccXYZ:%5.2f,%5.2f,%5.2f\r\n", acc.x, acc.y, acc.z);
 		ret = HAL_UART_Transmit(&huart3, buf, strlen((char*)buf), HAL_MAX_DELAY);
@@ -193,7 +229,7 @@ static void MX_SPI1_Init(void)
 	/* USER CODE END SPI1_Init 2 */
 
 }
-
+#ifndef USE_USART
 /**
  * @brief TIM1 Initialization Function
  * @param None
@@ -249,7 +285,7 @@ static void MX_TIM1_Init(void)
 	/* USER CODE END TIM1_Init 2 */
 
 }
-
+#endif
 
 /* USER CODE BEGIN TIM3_Init 2 */
 /*##-1- Configure the TIM peripheral #######################################*/
@@ -312,6 +348,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	READ_ACC = 1;	// true,  a FLAG to read accelerometer
 	BSP_LED_Toggle(LED4);  //
 }
+
+#ifdef USE_USART
 /* USER CODE END TIM3_Init  */
 /**
  * @brief USART1 Initialization Function
@@ -378,11 +416,13 @@ static void MX_USART3_UART_Init(void)
 	/* USER CODE END USART3_Init 2 */
 
 }
+#endif
+
 static void my_UART2_Init()
 {
 	/*##-1- Configure the UART peripheral ######################################*/
 	/* Put the USART peripheral in the Asynchronous mode (UART Mode) */
-	/* UART1 configured as follow:
+	/* UART2 configured as follow:
       - Word Length = 8 Bits
       - Stop Bit = One Stop bit
       - Parity = None
@@ -620,11 +660,15 @@ int main(void) {
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	MX_SPI1_Init();
+#ifdef USE_USART
 	MX_USART1_UART_Init();
 	MX_USART3_UART_Init();
+#endif
+
 	MX_TIM1_Init();
 
 	my_TIM3_Init();
+
 	my_UART2_Init();
 
 	/* Configure LED3, LED4, LED5 and LED6 */
