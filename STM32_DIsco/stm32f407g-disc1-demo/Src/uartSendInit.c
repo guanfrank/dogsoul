@@ -88,7 +88,18 @@ void uartTx(int32_t indx){
 			strcpy(aTxBuffer,"s");
 			STAND = 0; // avoid repeat sending char
 			break; /* optional */
-		/* you can have any number of case statements */
+		case 2 :
+			strcpy(aTxBuffer,"A");
+
+			break; /* optional */		/* you can have any number of case statements */
+		case 3 :
+			strcpy(aTxBuffer,"F");
+
+			break; /* optional */
+		case 4 :
+			strcpy(aTxBuffer,"B");
+
+			break; /* optional */
 		default : /* Optional */
 			;
 	}
