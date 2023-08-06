@@ -68,6 +68,7 @@ static const bool RHINO_REQUIRE_ENDPOINT = true;
 static const char* ACCESS_KEY = "fKXqfXSOn2RG3z0SQmfIBe5Oe9eU9B0EtDhxNhaNNUrdCPVERLIkAQ=="; //AccessKey string obtained from Picovoice Console (https://picovoice.ai/console/)
 /* UART handler declaration */
 UART_HandleTypeDef UartHandle;
+extern void uartTx();
 //__IO ITStatus UartReady = RESET;
 SPI_HandleTypeDef hspi1;
 
@@ -154,7 +155,7 @@ void accConfigInit(void){
 	LIS3DSH_InitTypeDef accConfigDef;
 
 	accConfigDef.dataRate = LIS3DSH_DATARATE_3_125; /* 3.125 Hz Normal Mode */
-	accConfigDef.fullScale = LIS3DSH_FULLSCALE_16;   /* 16 g  */
+	accConfigDef.fullScale = LIS3DSH_FULLSCALE_2;   /* was 16 g  */
 	accConfigDef.enableAxes = LIS3DSH_XYZ_ENABLE;
 	accConfigDef.antiAliasingBW = LIS3DSH_FILTER_BW_50;  /* 50 Hz  */
 	accConfigDef.interruptEnable = false;
