@@ -27,6 +27,7 @@
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o"
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o"
 "./Src/LIS3DSH.o"
+"./Src/complementaryFilter.o"
 "./Src/main.o"
 "./Src/pv_audio_rec.o"
 "./Src/pv_st_f407.o"

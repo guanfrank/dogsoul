@@ -59,6 +59,7 @@ TIM_HandleTypeDef TimHandle;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+float accel_x, accel_y, accel_z;
 int8_t READ_ACC = 0;
 static const float PORCUPINE_SENSITIVITY = 0.75f;
 static const float RHINO_SENSITIVITY = 0.5f;
@@ -161,14 +162,18 @@ void accConfigInit(void){
 	accConfigDef.interruptEnable = false;
 
 	LIS3DSH_Init(&hspi1, &accConfigDef);
+
 }
+
+extern void complementaryFilter( float , float );
 
 void readACC(void)
 {
 	/* USER CODE BEGIN 1 */
-	const uint8_t UART_BUF_MAX = 80;
-	uint8_t buf[UART_BUF_MAX];
-	HAL_StatusTypeDef ret;
+	float pitch=0, roll=0;
+	//const uint8_t UART_BUF_MAX = 80;
+	//uint8_t buf[UART_BUF_MAX];
+	//HAL_StatusTypeDef ret;
 	//LIS3DSH_InitTypeDef accConfigDef;
 	LIS3DSH_DataScaled acc;
 	/* USER CODE END 1 */
@@ -178,6 +183,13 @@ void readACC(void)
 	{
 		acc = LIS3DSH_GetDataScaled();
 		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
+		accel_x = acc.x;
+		accel_y = acc.y;
+		accel_z = acc.z;
+
+	    // Run the complementary filter
+	    complementaryFilter( pitch, roll );
+
 	   	if(      acc.x > 0.1f) {//move up/back - red
 			balance(0);
 		}else if(acc.x < -0.1f) {//move down/front - green
@@ -188,10 +200,7 @@ void readACC(void)
 		//sprintf((char*)buf,"#AccXYZ:%.12f,%.12f,%.12f\r\n", acc.x, acc.y, acc.z);
 		printf("#XYZ:%.12f,%.12f,%.12f\r\n", acc.x, acc.y, acc.z);
 		//printf("#AccXYZ:%5.2f,%5.2f,%5.2f\r\n", acc.x, acc.y, acc.z);
-		ret = HAL_UART_Transmit(&huart3, buf, strlen((char*)buf), HAL_MAX_DELAY);
-		if(ret != HAL_OK) {
-			strcpy((char*)buf, "Error Tx:%d\r\n");
-		}
+
 
 	}
 }
