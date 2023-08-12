@@ -60,6 +60,7 @@ TIM_HandleTypeDef TimHandle;
 
 /* Private variables ---------------------------------------------------------*/
 float accel_x, accel_y, accel_z;
+float pitch, roll;
 int8_t READ_ACC = 0;
 static const float PORCUPINE_SENSITIVITY = 0.75f;
 static const float RHINO_SENSITIVITY = 0.5f;
@@ -165,12 +166,12 @@ void accConfigInit(void){
 
 }
 
-extern void complementaryFilter( float , float );
+extern void complementaryFilter( );
 
 void readACC(void)
 {
 	/* USER CODE BEGIN 1 */
-	float pitch=0, roll=0;
+
 	//const uint8_t UART_BUF_MAX = 80;
 	//uint8_t buf[UART_BUF_MAX];
 	//HAL_StatusTypeDef ret;
@@ -188,11 +189,11 @@ void readACC(void)
 		accel_z = acc.z;
 
 	    // Run the complementary filter
-	    complementaryFilter( pitch, roll );
+	    complementaryFilter( );
 
-	   	if(      acc.x > 0.1f) {//move up/back - red
+	   	if( pitch > 0.1f) {//move up/back - red
 			balance(0);
-		}else if(acc.x < -0.1f) {//move down/front - green
+		}else if(pitch < -0.1f) {//move down/front - green
 			balance(1);
 		}else {//no move - blue
 			balance(2);
