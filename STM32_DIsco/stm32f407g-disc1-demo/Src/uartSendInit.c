@@ -190,7 +190,7 @@ void uartTx(int32_t indx){
   /* Reset transmission flag */
   UartReady = RESET;
 #endif
-  printf("aTxBuffer,aRxBuffer,RXBUFFERSIZE=%s,%s,%d", aTxBuffer,aRxBuffer,RXBUFFERSIZE);
+  printf("aTxBuffer,aRxBuffer,RXBUFFERSIZE=%s,%s,%d\n", aTxBuffer,aRxBuffer,RXBUFFERSIZE);
   /*##-6- Compare the sent and received buffers ##############################*/
 /*  if(Buffercmp((uint8_t*)aTxBuffer,(uint8_t*)aRxBuffer,RXBUFFERSIZE))
   {
