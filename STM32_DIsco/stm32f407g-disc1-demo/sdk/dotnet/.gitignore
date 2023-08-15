@@ -1,8 +1,0 @@
-.vscode
-.vs
-*.user
-Picovoice/bin/**
-Picovoice/obj/**
-Picovoice/Properties/**
-PicovoiceTest/bin/**
-PicovoiceTest/obj/**

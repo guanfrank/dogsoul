@@ -1,2 +1,0 @@
-include ':picovoice'
-rootProject.name = "Picovoice"
