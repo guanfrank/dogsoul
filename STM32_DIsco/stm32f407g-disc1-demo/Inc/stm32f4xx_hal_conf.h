@@ -35,40 +35,35 @@
 /**
   * @brief This is the list of modules to be used in the HAL driver
   */
-#define HAL_DMA_EX_MODULE_ENABLED
-#define HAL_FLASH_MODULE_ENABLED 
-#define HAL_FLASH_RAMFUNC_MODULE_ENABLED
-#define HAL_HCD_MODULE_ENABLED
+#define HAL_MODULE_ENABLED
 
-
-#define HAL_CRYP_MODULE_ENABLED
+  /* #define HAL_CRYP_MODULE_ENABLED */
 /* #define HAL_ADC_MODULE_ENABLED */
 /* #define HAL_CAN_MODULE_ENABLED */
-/* #define HAL_CRC_MODULE_ENABLED */
+#define HAL_CRC_MODULE_ENABLED
 /* #define HAL_CAN_LEGACY_MODULE_ENABLED */
 /* #define HAL_DAC_MODULE_ENABLED */
 /* #define HAL_DCMI_MODULE_ENABLED */
-/* #define HAL_DMA2D_MODULE_ENABLED */
+#define HAL_DMA2D_MODULE_ENABLED
 /* #define HAL_ETH_MODULE_ENABLED */
 /* #define HAL_ETH_LEGACY_MODULE_ENABLED */
 /* #define HAL_NAND_MODULE_ENABLED */
 /* #define HAL_NOR_MODULE_ENABLED */
 /* #define HAL_PCCARD_MODULE_ENABLED */
 /* #define HAL_SRAM_MODULE_ENABLED */
-/* #define HAL_SDRAM_MODULE_ENABLED */
+#define HAL_SDRAM_MODULE_ENABLED
 /* #define HAL_HASH_MODULE_ENABLED */
-#define HAL_I2C_EX_MODULE_ENABLED
-/* #define HAL_I2S_MODULE_ENABLED */
+#define HAL_I2C_MODULE_ENABLED
+#define HAL_I2S_MODULE_ENABLED
 /* #define HAL_IWDG_MODULE_ENABLED */
-/* #define HAL_LTDC_MODULE_ENABLED */
+#define HAL_LTDC_MODULE_ENABLED
 /* #define HAL_RNG_MODULE_ENABLED */
-#define HAL_RTC_MODULE_ENABLED
-#define HAL_RTC_EX_MODULE_ENABLED
-/* #define HAL_SAI_MODULE_ENABLED */
-/* #define HAL_SD_MODULE_ENABLED */
+/* #define HAL_RTC_MODULE_ENABLED */
+#define HAL_SAI_MODULE_ENABLED
+#define HAL_SD_MODULE_ENABLED
 /* #define HAL_MMC_MODULE_ENABLED */
-
-
+#define HAL_SPI_MODULE_ENABLED
+#define HAL_TIM_MODULE_ENABLED
 #define HAL_UART_MODULE_ENABLED
 /* #define HAL_USART_MODULE_ENABLED */
 /* #define HAL_IRDA_MODULE_ENABLED */
@@ -76,64 +71,23 @@
 /* #define HAL_SMBUS_MODULE_ENABLED */
 /* #define HAL_WWDG_MODULE_ENABLED */
 /* #define HAL_PCD_MODULE_ENABLED */
-/* #define HAL_HCD_MODULE_ENABLED */
-/* #define HAL_DSI_MODULE_ENABLED */
+#define HAL_HCD_MODULE_ENABLED
+#define HAL_DSI_MODULE_ENABLED
 /* #define HAL_QSPI_MODULE_ENABLED */
-/* #define HAL_QSPI_MODULE_ENABLED */
-
+#define HAL_QSPI_MODULE_ENABLED
+/* #define HAL_CEC_MODULE_ENABLED */
 /* #define HAL_FMPI2C_MODULE_ENABLED */
 /* #define HAL_FMPSMBUS_MODULE_ENABLED */
 /* #define HAL_SPDIFRX_MODULE_ENABLED */
 /* #define HAL_DFSDM_MODULE_ENABLED */
 /* #define HAL_LPTIM_MODULE_ENABLED */
-#define HAL_MODULE_ENABLED
-/* #define HAL_ADC_MODULE_ENABLED      */
-/* #define HAL_CAN_MODULE_ENABLED      */
-/* #define HAL_CAN_LEGACY_MODULE_ENABLED      */
-#define HAL_CRC_MODULE_ENABLED
-/* #define HAL_CRYP_MODULE_ENABLED     */
-/* #define HAL_DAC_MODULE_ENABLED      */
-/* #define HAL_DCMI_MODULE_ENABLED     */
-
-/* #define HAL_DMA2D_MODULE_ENABLED    */
-/* #define HAL_ETH_MODULE_ENABLED      */
-/* #define HAL_FLASH_MODULE_ENABLED	*/
-/* #define HAL_NAND_MODULE_ENABLED     */
-/* #define HAL_NOR_MODULE_ENABLED      */
-/* #define HAL_PCCARD_MODULE_ENABLED   */
-/* #define HAL_SRAM_MODULE_ENABLED     */
-/* #define HAL_SDRAM_MODULE_ENABLED    */
-/* #define HAL_HASH_MODULE_ENABLED     */
-#define HAL_I2C_MODULE_ENABLED
-#define HAL_I2S_MODULE_ENABLED 
-/* #define HAL_IWDG_MODULE_ENABLED     */
-/* #define HAL_LTDC_MODULE_ENABLED     */
-#define HAL_RCC_MODULE_ENABLED
-/* #define HAL_RNG_MODULE_ENABLED       */
-
-/* #define HAL_SAI_MODULE_ENABLED        */
-/* #define HAL_SD_MODULE_ENABLED         */
-#define HAL_SPI_MODULE_ENABLED
-#define HAL_TIM_MODULE_ENABLED
-#define HAL_TIM_EX_MODULE_ENABLED
-//* #define HAL_UART_MODULE_ENABLED      */
-/* #define HAL_USART_MODULE_ENABLED     */
-/* #define HAL_IRDA_MODULE_ENABLED      */
-/* #define HAL_SMARTCARD_MODULE_ENABLED */
-/* #define HAL_WWDG_MODULE_ENABLED      */
-
-/* #define HAL_PCD_MODULE_ENABLED      */
-/* #define HAL_HCD_MODULE_ENABLED      */
-
 #define HAL_GPIO_MODULE_ENABLED
 #define HAL_EXTI_MODULE_ENABLED
 #define HAL_DMA_MODULE_ENABLED
 #define HAL_RCC_MODULE_ENABLED
-#define HAL_FLASH_EX_MODULE_ENABLED
+#define HAL_FLASH_MODULE_ENABLED
 #define HAL_PWR_MODULE_ENABLED
-#define HAL_PWR_EX_MODULE_ENABLED
 #define HAL_CORTEX_MODULE_ENABLED
-/*#define HAL_USB_MODULE_ENABLED */
 
 /* ########################## HSE/HSI Values adaptation ##################### */
 /**
@@ -193,14 +147,10 @@
 /**
   * @brief This is the HAL system configuration section
   */
-//#define  VDD_VALUE		      3300U /*!< Value of VDD in mv */
-//#define  TICK_INT_PRIORITY            0U   /*!< tick interrupt priority */
-#define  VDD_VALUE                    (3300U) /*!< Value of VDD in mv */
-#define  TICK_INT_PRIORITY            (0x0FU) /*!< tick interrupt priority */
+#define  VDD_VALUE		      3300U /*!< Value of VDD in mv */
+#define  TICK_INT_PRIORITY            15U   /*!< tick interrupt priority */
 #define  USE_RTOS                     0U
-//#define  PREFETCH_ENABLE              1U
-#define  PREFETCH_ENABLE              0U /* The prefetch will be enabled in SystemClock_Config(), depending on the used
-                                            STM32F405/415/07/417 device: RevA (prefetch must be off) or RevZ (prefetch can be on/off) */
+#define  PREFETCH_ENABLE              1U
 #define  INSTRUCTION_CACHE_ENABLE     1U
 #define  DATA_CACHE_ENABLE            1U
 
@@ -314,8 +264,8 @@
 * Deactivated: CRC code cleaned from driver
 */
 
-//#define USE_SPI_CRC                     0U
-#define USE_SPI_CRC                     1U
+#define USE_SPI_CRC                     0U
+
 /* Includes ------------------------------------------------------------------*/
 /**
   * @brief Include module's header file
@@ -336,10 +286,6 @@
 #ifdef HAL_DMA_MODULE_ENABLED
   #include "stm32f4xx_hal_dma.h"
 #endif /* HAL_DMA_MODULE_ENABLED */
-
-#ifdef HAL_DMA_EX_MODULE_ENABLED
-  #include "stm32f4xx_hal_dma_ex.h"
-#endif /* HAL_DMA_EX_MODULE_ENABLED */
 
 #ifdef HAL_CORTEX_MODULE_ENABLED
   #include "stm32f4xx_hal_cortex.h"
@@ -389,15 +335,6 @@
   #include "stm32f4xx_hal_flash.h"
 #endif /* HAL_FLASH_MODULE_ENABLED */
 
-#ifdef HAL_FLASH_RAMFUNC_MODULE_ENABLED
-  #include "stm32f4xx_hal_flash_ramfunc.h"
-#endif /* HAL_FLASH_MODULE_ENABLED */
-
-#ifdef HAL_FLASH_EX_MODULE_ENABLED
-  #include "stm32f4xx_hal_flash_ex.h"
-#endif /* HAL_FLASH_EX_MODULE_ENABLED */
-
-
 #ifdef HAL_SRAM_MODULE_ENABLED
   #include "stm32f4xx_hal_sram.h"
 #endif /* HAL_SRAM_MODULE_ENABLED */
@@ -426,10 +363,6 @@
  #include "stm32f4xx_hal_i2c.h"
 #endif /* HAL_I2C_MODULE_ENABLED */
 
-#ifdef HAL_I2C_EX_MODULE_ENABLED
- #include "stm32f4xx_hal_i2c_ex.h"
-#endif /* HAL_I2C_MODULE_ENABLED */
-
 #ifdef HAL_SMBUS_MODULE_ENABLED
  #include "stm32f4xx_hal_smbus.h"
 #endif /* HAL_SMBUS_MODULE_ENABLED */
@@ -450,20 +383,12 @@
  #include "stm32f4xx_hal_pwr.h"
 #endif /* HAL_PWR_MODULE_ENABLED */
 
-#ifdef HAL_PWR_EX_MODULE_ENABLED
- #include "stm32f4xx_hal_pwr_ex.h"
-#endif /* HAL_PWR_MODULE_ENABLED */
-
 #ifdef HAL_RNG_MODULE_ENABLED
  #include "stm32f4xx_hal_rng.h"
 #endif /* HAL_RNG_MODULE_ENABLED */
 
 #ifdef HAL_RTC_MODULE_ENABLED
  #include "stm32f4xx_hal_rtc.h"
-#endif /* HAL_RTC_MODULE_ENABLED */
-
-#ifdef HAL_RTC_EX_MODULE_ENABLED
- #include "stm32f4xx_hal_rtc_ex.h"
 #endif /* HAL_RTC_MODULE_ENABLED */
 
 #ifdef HAL_SAI_MODULE_ENABLED
@@ -481,11 +406,6 @@
 #ifdef HAL_TIM_MODULE_ENABLED
  #include "stm32f4xx_hal_tim.h"
 #endif /* HAL_TIM_MODULE_ENABLED */
-
-#ifdef HAL_TIM_EX_MODULE_ENABLED
- #include "stm32f4xx_hal_tim_ex.h"
-#endif /* HAL_TIM_MODULE_ENABLED */
-
 
 #ifdef HAL_UART_MODULE_ENABLED
  #include "stm32f4xx_hal_uart.h"
@@ -523,7 +443,9 @@
  #include "stm32f4xx_hal_qspi.h"
 #endif /* HAL_QSPI_MODULE_ENABLED */
 
-
+#ifdef HAL_CEC_MODULE_ENABLED
+ #include "stm32f4xx_hal_cec.h"
+#endif /* HAL_CEC_MODULE_ENABLED */
 
 #ifdef HAL_FMPI2C_MODULE_ENABLED
  #include "stm32f4xx_hal_fmpi2c.h"
