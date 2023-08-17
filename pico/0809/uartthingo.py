@@ -1,3 +1,4 @@
+
 from machine import Pin, UART, PWM
 import utime
 
@@ -42,7 +43,7 @@ while True:
         # elif received_char == 'B':
             # pulse(A1A, A1B, B1A, B1B, 100, 0, 100)
         # Wait a bit to avoid flooding the UART
-        utime.sleep_ms(100)
+        # utime.sleep_ms(100)
 
     except Exception as e:
         print("Error:", e)
