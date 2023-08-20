@@ -25,7 +25,10 @@ SUBDIRS := \
 Core/Src \
 Core/Startup \
 Drivers/BSP/Components/cs43l22 \
-Drivers/BSP/STM32F4-Discovery \
+Drivers/BSP/Components/ft6x06 \
+Drivers/BSP/Components/nt35510 \
+Drivers/BSP/Components/otm8009a \
+Drivers/BSP/STM32469I-Discovery \
 Drivers/STM32F4xx_HAL_Driver/Src \
 FATFS/App \
 FATFS/Target \

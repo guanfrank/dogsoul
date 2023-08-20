@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "stm32f4_discovery.h"
+#include "stm32469i_discovery.h"
 
 #include "pv_st_f407.h"
 
@@ -68,10 +68,10 @@ pv_status_t pv_board_init() {
         return PV_STATUS_INVALID_STATE;
     }
 
-    BSP_LED_Init(LED3);
-    BSP_LED_Init(LED4);
-    BSP_LED_Init(LED5);
-    BSP_LED_Init(LED6);
+    BSP_LED_Init(LED3);	//RED
+    BSP_LED_Init(LED4);	//BLEU
+    BSP_LED_Init(LED1); //GREEN
+    BSP_LED_Init(LED2);	//ORANGE
 
     memcpy(uuid, (uint8_t *) UUID_ADDRESS, UUID_SIZE);
     return PV_STATUS_SUCCESS;

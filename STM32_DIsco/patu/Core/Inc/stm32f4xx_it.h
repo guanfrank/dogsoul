@@ -29,8 +29,8 @@
 /* USER CODE BEGIN Includes */
  /* USER CODE BEGIN Includes from demo */
  #include "main.h"
- #include "stm32f4_discovery.h"
- #include "stm32f4_discovery_audio.h"
+ #include "stm32469i_discovery.h"
+ #include "stm32469i_discovery_audio.h"
  /* USER CODE END Includes from demo */
 /* USER CODE END Includes */
 

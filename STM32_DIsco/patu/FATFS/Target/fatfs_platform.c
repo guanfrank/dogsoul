@@ -17,6 +17,7 @@
 */
 /* USER CODE END Header */
 #include "fatfs_platform.h"
+#include "stm32469i_discovery.h"
 
 uint8_t	BSP_PlatformIsDetected(void) {
     uint8_t status = SD_PRESENT;

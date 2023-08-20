@@ -24,6 +24,7 @@
 #include <string.h>
 #include "main.h"
 #include "stm32f4xx_hal_uart.h"
+#include "stm32469i_discovery.h"
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
   */
@@ -65,7 +66,7 @@ uint8_t aRxBuffer[RXBUFFERSIZE];
 static void Error_handler(void)
 {
   /* Turn LED5 on */
-  BSP_LED_On(LED5); //red
+  BSP_LED_On(LED3); //red
   while(1)
   {
   }
@@ -238,7 +239,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
   UartReady = SET;
 
   /* Turn LED6 on: Transfer in transmission process is correct */
-  BSP_LED_On(LED6);
+  BSP_LED_On(LED4); //BLUE
 }
 
 /**

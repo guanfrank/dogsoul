@@ -31,8 +31,9 @@
 
 #include "stm32f4xx_hal_tim.h"
 #include "stm32f4xx_hal_spi.h"
-#include "stm32f4_discovery.h"
+#include "stm32469i_discovery.h"
 #include "pv_picovoice.h"
+#include "picovoice.h"
 #include "pv_audio_rec.h"
 #include "pv_params.h"
 #include "pv_st_f407.h"
@@ -47,7 +48,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define PICOVOICE
 
 #define MEMORY_BUFFER_SIZE (70 * 1024)
 
@@ -247,10 +248,10 @@ static void inference_callback(pv_inference_t *inference) {
 	}
 	printf("}\n\n");
 	for (int32_t i = 0; i < 10; i++) {
-		BSP_LED_Toggle(LED3);
-		BSP_LED_Toggle(LED4);
-		BSP_LED_Toggle(LED5);
-		BSP_LED_Toggle(LED6);
+		BSP_LED_Toggle(LED3);	//red
+		BSP_LED_Toggle(LED4);	//blue
+		BSP_LED_Toggle(LED1); //green
+		BSP_LED_Toggle(LED2);	//orange
 		HAL_Delay(30);
 	}
 	pv_inference_delete(inference);
@@ -310,10 +311,10 @@ int main(void)
 	MX_TIM7_Init();
 	/* USER CODE BEGIN 2 */
 	/* Configure LED3, LED4, LED5 and LED6 */
-	BSP_LED_Init(LED3);
-	BSP_LED_Init(LED4);
-	BSP_LED_Init(LED5);
-	BSP_LED_Init(LED6);
+	BSP_LED_Init(LED3);	//RED
+	BSP_LED_Init(LED4);	//BLUE
+	BSP_LED_Init(LED1);  //GREEN
+	BSP_LED_Init(LED2);	//ORANGE
 
 	/* USER CODE END 2 */
 

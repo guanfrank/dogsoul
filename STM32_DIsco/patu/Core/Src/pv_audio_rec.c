@@ -13,7 +13,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include "stm32f4_discovery_audio.h"
+#include "stm32469i_discovery_audio.h"
 
 #include "picovoice.h"
 
