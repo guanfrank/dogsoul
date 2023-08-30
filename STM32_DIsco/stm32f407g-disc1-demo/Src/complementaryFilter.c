@@ -3,7 +3,7 @@
 
 // Accelerometer data
 extern float accel_x, accel_y, accel_z;
-extern float pitch,  roll;
+extern float pitch, roll;
 //void complementaryFilter( float , float );
 // Gyroscope data
 float gyro_x, gyro_y, gyro_z;
@@ -35,11 +35,9 @@ void complementaryFilter() {
     roll = atan2(accel_y, sqrt(accel_x * accel_x + accel_z * accel_z));
 
     // Combine gyroscope and accelerometer data using complementary filter
-    pitch = alpha * (pitch + gyro_x) + (1 - alpha) * pitch;
-    roll = alpha * (roll + gyro_y) + (1 - alpha) * roll;
-    // convert it to angle in degrees
-    pitch =  pitch * (180/M_PI);
-    roll = roll * (180/M_PI);
+    pitch = (alpha * (pitch + gyro_x) + (1 - alpha) * pitch) * (180.0 / M_PI);
+    roll = (alpha * (roll + gyro_y) + (1 - alpha) * roll) * (180.0 / M_PI);
+
     // Output filtered pitch and roll angles
     printf("%f, %f\n", pitch, roll);
    // printf("%f\n", roll);
