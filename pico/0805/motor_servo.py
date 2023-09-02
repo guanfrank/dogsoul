@@ -10,8 +10,8 @@ class TwoServos:
         self.right_sm.freq(50)
 
     def stop(self):
-        self.left_sm.duty_u16(2400)
-        self.right_sm.duty_u16(2400)
+        self.left_sm.duty_u16(2500)
+        self.right_sm.duty_u16(2500)
 
     def forward(self):
         self.left_sm.duty_u16(2000)
